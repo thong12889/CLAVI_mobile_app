@@ -31,10 +31,13 @@
     <EmbeddedResource Include="..\..\Models\cutting.onnx" Condition="Exists('..\..\Models\cutting.onnx')">
       <Link>Anomaly\cutting.onnx</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Models\technopro_obj.onnx" Condition="Exists('..\..\Models\technoproobj.onnx')">
+      <Link>ObjectDetection\Object.onnx</Link>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <!-- TODO: Update to use official package once Xamarin support is added to it -->
-    <PackageReference Include="Microsoft.ML.OnnxRuntime.Managed" Version="1.10.0" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Managed" Version="1.13.1" />
     <PackageReference Include="SkiaSharp" Version="2.88.3" />
   </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using VisionSample.ObjectDetection;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -24,10 +25,12 @@ namespace VisionSample.Forms
         IVisionSample _resnet;
         IVisionSample _ultraface;
         IVisionSample _anomaly;
+        IVisionSample _obj;
 
         IVisionSample ResNet => _resnet ??= new ResNetSample();
         IVisionSample Ultraface => _ultraface ??= new UltrafaceSample();
         IVisionSample Anomaly => _anomaly ??= new AnomalyMain();
+        IVisionSample Object => _obj ??= new ObjectDetectionMain();
 
         public MainPage()
         {
@@ -49,6 +52,9 @@ namespace VisionSample.Forms
 
             if (ResourceLoader.EmbeddedResourceExists(AnomalyMain.ModelFilename))
                 Models.Items.Add(Anomaly.Name);
+
+            if (ResourceLoader.EmbeddedResourceExists(ObjectDetectionMain.ModelFilename))
+                Models.Items.Add(Object.Name);
 
             if (Models.Items.Any())
             {
@@ -85,6 +91,7 @@ namespace VisionSample.Forms
                 ResNetSample.Identifier => ResNet,
                 UltrafaceSample.Identifier => Ultraface,
                 AnomalyMain.Identifier => Anomaly,
+                ObjectDetectionMain.Identifier => Object,
                 _ => null
             };
             
@@ -131,6 +138,7 @@ namespace VisionSample.Forms
                     ResNetSample.Identifier => ResNet,
                     UltrafaceSample.Identifier => Ultraface,
                     AnomalyMain.Identifier => Anomaly,
+                    ObjectDetectionMain.Identifier => Object,
                     _ => null
                 };
 
@@ -157,6 +165,7 @@ namespace VisionSample.Forms
                 ResNetSample.Identifier => "dog.jpg",
                 UltrafaceSample.Identifier => "satya.jpg",
                 AnomalyMain.Identifier => "img_000002_bad.png",
+                ObjectDetectionMain.Identifier => "img_17.jpg",
                 _ => null
             };
 

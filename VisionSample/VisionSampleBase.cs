@@ -40,8 +40,8 @@ namespace VisionSample
             // and has its own threadpools.
             _prevAsyncTask = Task.Run(() =>
                             {
-                                /*if (executionProvider == _curExecutionProvider)
-                                    return;*/
+                                if (executionProvider == _curExecutionProvider)
+                                    return;
 
                                 if (executionProvider == ExecutionProviderOptions.CPU)
                                 {

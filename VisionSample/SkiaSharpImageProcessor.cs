@@ -15,6 +15,7 @@ namespace VisionSample
         protected virtual Tensor<TTensor> OnGetTensorForImage(SKBitmap image) => throw new NotImplementedException();
         protected virtual void OnPrepareToApplyPredictions(SKBitmap image, SKCanvas canvas) { }
         protected virtual void OnApplyPrediction(TPrediction prediction, SKPaint textPaint, SKPaint rectPaint, SKCanvas canvas) { }
+        protected virtual void OnApplyObj(TPrediction prediction, SKPaint textPaint, SKPaint rectPaint, SKCanvas canvas) { }
 
         public byte[] ApplyAnomalyToImage(SKBitmap predictions, SKBitmap image)
         {
@@ -25,6 +26,34 @@ namespace VisionSample
             int offsetTop = image.Height / 2 - image.Height / 2;
             canvas.DrawBitmap(image, SKRect.Create(offset, offsetTop, predictions.Width, predictions.Height));
             canvas.DrawBitmap(predictions, SKRect.Create(offset, offsetTop, predictions.Width, predictions.Height));
+
+            canvas.Flush();
+
+            using var snapshot = surface.Snapshot();
+            using var imageData = snapshot.Encode(SKEncodedImageFormat.Jpeg, 100);
+            byte[] bytes = imageData.ToArray();
+
+            return bytes;
+        }
+
+        public byte[] ApplyObjToImage(IList<TPrediction> predictions, SKBitmap image)
+        {
+            // Annotate image to reflect predictions and save for viewing
+            using SKSurface surface = SKSurface.Create(new SKImageInfo(image.Width, image.Height));
+            using SKCanvas canvas = surface.Canvas;
+
+            // Normalize paint size based on 800f shortest edge
+            float ratio = 800f / Math.Min(image.Width, image.Height);
+            var textSize = 32 * ratio;
+            var strokeWidth = 2f * ratio;
+
+            using SKPaint textPaint = new SKPaint { TextSize = textSize, Color = SKColors.White };
+            using SKPaint rectPaint = new SKPaint { StrokeWidth = strokeWidth, IsStroke = true, Color = SKColors.Red };
+
+            canvas.DrawBitmap(image, 0, 0);
+
+            foreach (var prediction in predictions)
+                OnApplyObj(prediction, textPaint, rectPaint, canvas);
 
             canvas.Flush();
 
