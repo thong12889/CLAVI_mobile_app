@@ -29,10 +29,13 @@
       <Link>Ultraface\ultraface.onnx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\Models\cutting.onnx" Condition="Exists('..\..\Models\cutting.onnx')">
-      <Link>Anomaly\cutting.onnx</Link>
+      <Link>Anomaly\Anomaly.onnx</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\Models\technopro_obj.onnx" Condition="Exists('..\..\Models\technoproobj.onnx')">
+    <EmbeddedResource Include="..\..\Models\nuts_obj_sim.onnx" Condition="Exists('..\..\Models\nuts_obj_sim.onnx')">
       <Link>ObjectDetection\Object.onnx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Models\nuts_semseg.onnx" Condition="Exists('..\..\Models\nuts_semseg.onnx')">
+      <Link>SemanticSegment\SemSeg.onnx</Link>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

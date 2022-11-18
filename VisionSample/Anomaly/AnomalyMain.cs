@@ -12,7 +12,7 @@ namespace VisionSample
     public class AnomalyMain : VisionSampleBase<AnomalyImageProcessor>
     {
         public const string Identifier = "Anomaly";
-        public const string ModelFilename = "cutting.onnx";
+        public const string ModelFilename = "Anomaly.onnx";
 
         public AnomalyMain()
             : base(Identifier, ModelFilename) { }

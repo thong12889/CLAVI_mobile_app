@@ -27,6 +27,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SampleImages\00000179.jpg" />
+    <None Remove="SampleImages\New-Nut-99.jpg" />
+    <None Remove="SampleImages\nuts_laying1.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2244" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
@@ -37,7 +43,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="SampleImages\00000179.jpg" />
     <EmbeddedResource Include="SampleImages\dog.jpg" />
+    <EmbeddedResource Include="SampleImages\New-Nut-99.jpg" />
+    <EmbeddedResource Include="SampleImages\nuts_laying1.jpg" />
     <EmbeddedResource Include="SampleImages\satya.jpg" />
     <EmbeddedResource Include="SampleImages\img_000002_bad.png" />
     <EmbeddedResource Include="SampleImages\img_17.jpg" />

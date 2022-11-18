@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
-using VisionSample.ObjectDetection;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -26,11 +25,13 @@ namespace VisionSample.Forms
         IVisionSample _ultraface;
         IVisionSample _anomaly;
         IVisionSample _obj;
+        IVisionSample _semseg;
 
         IVisionSample ResNet => _resnet ??= new ResNetSample();
         IVisionSample Ultraface => _ultraface ??= new UltrafaceSample();
         IVisionSample Anomaly => _anomaly ??= new AnomalyMain();
         IVisionSample Object => _obj ??= new ObjectDetectionMain();
+        IVisionSample SemSeg => _semseg ??= new SemSegMain();
 
         public MainPage()
         {
@@ -55,6 +56,9 @@ namespace VisionSample.Forms
 
             if (ResourceLoader.EmbeddedResourceExists(ObjectDetectionMain.ModelFilename))
                 Models.Items.Add(Object.Name);
+
+            if (ResourceLoader.EmbeddedResourceExists(SemSegMain.ModelFilename))
+                Models.Items.Add(SemSeg.Name);
 
             if (Models.Items.Any())
             {
@@ -92,6 +96,7 @@ namespace VisionSample.Forms
                 UltrafaceSample.Identifier => Ultraface,
                 AnomalyMain.Identifier => Anomaly,
                 ObjectDetectionMain.Identifier => Object,
+                SemSegMain.Identifier => SemSeg,
                 _ => null
             };
             
@@ -139,6 +144,7 @@ namespace VisionSample.Forms
                     UltrafaceSample.Identifier => Ultraface,
                     AnomalyMain.Identifier => Anomaly,
                     ObjectDetectionMain.Identifier => Object,
+                    SemSegMain.Identifier => SemSeg,
                     _ => null
                 };
 
@@ -165,7 +171,8 @@ namespace VisionSample.Forms
                 ResNetSample.Identifier => "dog.jpg",
                 UltrafaceSample.Identifier => "satya.jpg",
                 AnomalyMain.Identifier => "img_000002_bad.png",
-                ObjectDetectionMain.Identifier => "img_17.jpg",
+                ObjectDetectionMain.Identifier => "New-Nut-99.jpg",
+                SemSegMain.Identifier => "nuts_laying1.jpg",
                 _ => null
             };
 

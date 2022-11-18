@@ -6,7 +6,7 @@ using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using SkiaSharp;
 
-namespace VisionSample.ObjectDetection
+namespace VisionSample
 {
     public class ObjectDetectionMain : VisionSampleBase<ObjImageProcessor>
     {
@@ -29,7 +29,7 @@ namespace VisionSample.ObjectDetection
 
         List<ObjPrediction> GetPredictions(Tensor<float> input, int sourceImageWidth, int sourceImageHeight, int inputW, int inputH)
         {
-            float threshold = 0.7f;
+            float threshold = 0.6f;
 
             // Setup inputs and outputs
             var inputMeta = Session.InputMetadata;

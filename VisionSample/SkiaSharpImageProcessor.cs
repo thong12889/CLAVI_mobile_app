@@ -64,6 +64,25 @@ namespace VisionSample
             return bytes;
         }
 
+        public byte[] ApplySemanticToImage(SKBitmap predictions, SKBitmap image)
+        {
+            using SKSurface surface = SKSurface.Create(new SKImageInfo(image.Width, image.Height));
+            using SKCanvas canvas = surface.Canvas;
+
+            int offset = image.Width / 2 - image.Width / 2;
+            int offsetTop = image.Height / 2 - image.Height / 2;
+            canvas.DrawBitmap(image, SKRect.Create(offset, offsetTop, predictions.Width, predictions.Height));
+            canvas.DrawBitmap(predictions, SKRect.Create(offset, offsetTop, predictions.Width, predictions.Height));
+
+            canvas.Flush();
+
+            using var snapshot = surface.Snapshot();
+            using var imageData = snapshot.Encode(SKEncodedImageFormat.Jpeg, 100);
+            byte[] bytes = imageData.ToArray();
+
+            return bytes;
+        }
+
         public byte[] ApplyPredictionsToImage(IList<TPrediction> predictions, SKBitmap image)
         {
             // Annotate image to reflect predictions and save for viewing
